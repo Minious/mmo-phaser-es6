@@ -28,4 +28,3 @@ class Game {
     }
 }
 exports.default = Game;
-//# sourceMappingURL=Game.js.map

@@ -1,44 +1,42 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
-var path = require('path')
+var path = require('path');
 
-var serverConfig = {
-  target: 'node',
-  entry: "./_server/index.js",
-  watch: true,
-  output: {
-    path: path.resolve(__dirname, 'bin/server'),
-    filename: 'index.js'
-  }
-}
+// var phaserModule = path.join(__dirname, '/node_modules/phaser/')
+// var phaser = path.join(phaserModule, 'src/phaser.js')
 
 var clientConfig = {
-  target: 'web',
-  entry: "./_client/index.js",
+  mode: "development",
+  target: 'node',
+  entry: {
+    app: "./client/src/index.ts",
+    vendor: ['phaser']
+  },
   watch: true,
+  devtool: "source-map",
   output: {
-    path: path.resolve(__dirname, 'bin/client'),
-    filename: 'index.js'
+    path: path.resolve(__dirname, 'client/dist'),
+    filename: '[name].bundle.js',
+    publicPath: "./dist/"
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+    // alias: {
+    //     'phaser': phaser,
+    // }
   },
   module: {
-    loaders: [
-      {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        loaders: ["babel-loader"]
-      }
+    rules: [
+      { test: /\.ts$/, loader: "ts-loader", exclude: /node_modules/ },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      { test: /\.css$/, use: [{loader: "style-loader"}, {loader: "css-loader"}] },
+      { test: [/\.vert$/, /\.frag$/], use: 'raw-loader' }
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      }
-    }),
-    new HtmlWebpackPlugin({template: './_client/index.html'})
+    new HtmlWebpackPlugin({
+      title: 'Output Management'
+    })
   ]
 }
 

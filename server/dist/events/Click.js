@@ -10,4 +10,3 @@ class ClickEvent {
     }
 }
 exports.default = ClickEvent;
-//# sourceMappingURL=Click.js.map

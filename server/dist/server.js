@@ -10,15 +10,13 @@ const Game_1 = __importDefault(require("./Game"));
 const dirproject = path_1.default.resolve(__dirname + "/../..");
 const app = express_1.default();
 const server = http_1.default.createServer(app);
-app.use("/", express_1.default.static(dirproject + "/bin/client"));
-app.use("/assets", express_1.default.static(dirproject + "/assets"));
-app.use("/vendor", express_1.default.static(dirproject + "/vendor"));
+app.use("/dist", express_1.default.static(dirproject + "/client/dist"));
+// app.use("/vendor", express.static(dirproject + "/vendor"));
 app.get("/", (req, res) => {
-    res.sendFile(dirproject + "/bin/client/index.html");
+    res.sendFile(dirproject + "/client/dist/index.html");
 });
 const PORT = process.env.PORT || 8081;
 server.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
 });
 const game = new Game_1.default(server);
-//# sourceMappingURL=server.js.map

@@ -12,4 +12,3 @@ class ConnectionEvent {
     }
 }
 exports.default = ConnectionEvent;
-//# sourceMappingURL=Connection.js.map

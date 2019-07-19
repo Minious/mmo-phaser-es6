@@ -9,12 +9,11 @@ const dirproject = path.resolve(__dirname + "/../..");
 const app = express();
 const server = http.createServer(app);
 
-app.use("/", express.static(dirproject + "/bin/client"));
-app.use("/assets", express.static(dirproject + "/assets"));
-app.use("/vendor", express.static(dirproject + "/vendor"));
+app.use("/dist", express.static(dirproject + "/client/dist"));
+// app.use("/vendor", express.static(dirproject + "/vendor"));
 
 app.get("/", (req, res) => {
-    res.sendFile(dirproject + "/bin/client/index.html");
+    res.sendFile(dirproject + "/client/dist/index.html");
 });
 
 const PORT = process.env.PORT || 8081;

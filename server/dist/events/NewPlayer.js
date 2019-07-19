@@ -22,4 +22,3 @@ class NewPlayerEvent {
     }
 }
 exports.default = NewPlayerEvent;
-//# sourceMappingURL=NewPlayer.js.map
